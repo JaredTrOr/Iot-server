@@ -48,12 +48,19 @@ const login = async (req,res) => {
     
 }
 
-const deleteUser = () => {
-    
+const deleteUser = async (req,res) => {
+    const {_id} = req.params;
+    try{
+        await User.deleteOne({_id})
+        res.json({success: true, msg: `User deleted`});
+    }
+    catch(err){
+        res.json({success: false, msg:err});
+    }
 }
 
 const updateUser = () => {
-
+    const {name,username, password, email, administrator} = req.body;
 }
 
 const getUserInformation = () => {
