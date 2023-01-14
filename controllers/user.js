@@ -1,14 +1,6 @@
 const User = require('../schemas/User');
 const bcrypt = require('bcrypt');
 
-const getUserInformation = () => {
-
-}
-
-const getStatistics = () => {
-
-}
-
 const register = async (req,res) => {
     const encryptedPassword = await bcrypt.hash(req.body.password, 10);
 
@@ -22,27 +14,53 @@ const register = async (req,res) => {
 
     try{
         await user.save();
-        req.session.user = user;
-        res.json({success: true, msg: `User registered`});
+        //req.session.user = user;
+        res.json({success: true, msg: `User registered`, user});
     }catch(err){
         res.json({success: false, msg:err});
     }
 }
 
 const login = async (req,res) => {
-    //Validation: ¿Passport or normal?
-    //Sessions?
-}
+    const {username, password} = req.body;
 
-const logout = () => {
-
+    try{
+        const user = await User.findOne({username});
+        console.log(user);
+        if(user){
+            try{
+                if(await bcrypt.compare(password, user.password)){
+                    res.json({success: true, msg:`User logged in`, user});
+                }
+                else{
+                    res.json({success: false, msg: `Incorrect password`});
+                }
+            }catch(err){
+                res.json({success: false, msg: err});
+            }
+        }
+        else{
+            res.json({success: false, msg: `Incorrect username`});
+        }
+    }catch(err){
+        res.json({success: false, msg: err});
+    }
+    
 }
 
 const deleteUser = () => {
-
+    
 }
 
 const updateUser = () => {
+
+}
+
+const getUserInformation = () => {
+
+}
+
+const getStatistics = () => {
 
 }
 
@@ -51,7 +69,6 @@ module.exports = {
     getUserInformation,
     register,
     login,
-    logout,
     deleteUser,
     updateUser
 }

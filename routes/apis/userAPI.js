@@ -12,9 +12,10 @@ const {
 
 //MiddleWares
 const isRegistered = require('../../middlewares/isRegistered');
+const isLogin = require('../../middlewares/isLogin');
 
 router.get('/statistics', getStatistics);
-router.post('/login', login);
+router.post('/login', isLogin,login);
 router.post('/register',isRegistered, register);
 router.put('/update', updateUser);
 router.delete('/delete', deleteUser);
