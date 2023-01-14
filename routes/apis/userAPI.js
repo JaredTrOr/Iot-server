@@ -8,10 +8,10 @@ const {
     updateUser,
     deleteUser,
     logout
-} = require('../controllers/user');
+} = require('../../controllers/user');
 
 //MiddleWares
-const isRegistered = require('../middlewares/isRegistered');
+const isRegistered = require('../../middlewares/isRegistered');
 
 router.get('/statistics', getStatistics);
 router.post('/login', login);

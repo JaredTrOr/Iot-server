@@ -10,8 +10,6 @@ const getStatistics = () => {
 }
 
 const register = async (req,res) => {
-
-    //Validation if the user already exists
     const encryptedPassword = await bcrypt.hash(req.body.password, 10);
 
     const user = new User({
@@ -24,13 +22,14 @@ const register = async (req,res) => {
 
     try{
         await user.save();
-        res.json({success: true, msg: `User registered!!`});
+        req.session.user = user;
+        res.json({success: true, msg: `User registered`});
     }catch(err){
         res.json({success: false, msg:err});
     }
 }
 
-const login = () => {
+const login = async (req,res) => {
     //Validation: ¿Passport or normal?
     //Sessions?
 }

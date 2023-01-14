@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {motorOperation} = require('../controllers/motor');
+const {motorOperation} = require('../../controllers/motor');
 
 router.post('/', motorOperation);
 

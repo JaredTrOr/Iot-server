@@ -4,10 +4,10 @@ const isRegistered = async (req,res,next) => {
     const {name, username, password, email, administrator} = req.body;
 
     if(name && username && password && email && administrator){
-        const user = await User.find({username});
-        if(!user){
-            const email = await User.find({email});
-            if(!email){
+        const userUsername = await User.findOne({username});
+        if(!userUsername){
+            const userEmail = await User.findOne({email});
+            if(!userEmail){
                 next();
             }
             else{
