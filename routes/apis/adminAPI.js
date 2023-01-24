@@ -5,7 +5,8 @@ const {
     getUsers
 } = require('../../controllers/admin');
 
-//Admin operations
-router.get('/getUsers', getUsers);
+
+router.get('/getUsers', getUsers); //Read all the users
+
 
 module.exports = router;

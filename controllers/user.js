@@ -15,7 +15,7 @@ const getUserInformation = async (req,res) => {
     
 }
 
-//READ INFORMATION
+//Get the favorite candy and the operations made
 const getStatistics = () => {
 
 }
@@ -82,9 +82,9 @@ const updateUser = async (req,res) => {
 
 //DELETE
 const deleteUser = async (req,res) => {
-    const {_id} = req.params;
+    const {id} = req.params;
     try{
-        await User.deleteOne({_id})
+        await User.deleteOne({_id: id})
         res.json({success: true, msg: `User deleted`});
     }
     catch(err){
@@ -100,5 +100,4 @@ module.exports = {
     login,
     updateUser,
     deleteUser,
-    logout
 }

@@ -1,5 +1,6 @@
 const User = require('../schemas/User');
 
+//READ INFORMATION
 const getUsers = async (req,res) => {
     try{
         const users = await User.find();
@@ -8,6 +9,7 @@ const getUsers = async (req,res) => {
         res.json({success: false, msg: err});
     }
 }
+
 
 module.exports = {
     getUsers
