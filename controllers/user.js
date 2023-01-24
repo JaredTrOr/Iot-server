@@ -1,6 +1,26 @@
 const User = require('../schemas/User');
 const bcrypt = require('bcrypt');
 
+//READ INFORMATION
+const getUserInformation = async (req,res) => {
+    const {id} = req.params;
+
+    try{
+        const user = await User.findById(id);
+        res.json({success: true, user});
+    }
+    catch(err){
+        res.json({success: false, msg: `ERROR: ${err}`});
+    }
+    
+}
+
+//READ INFORMATION
+const getStatistics = () => {
+
+}
+
+//CREATE
 const register = async (req,res) => {
     const encryptedPassword = await bcrypt.hash(req.body.password, 10);
 
@@ -21,6 +41,7 @@ const register = async (req,res) => {
     }
 }
 
+//VALIDATE
 const login = async (req,res) => {
     const {username, password} = req.body;
 
@@ -48,6 +69,18 @@ const login = async (req,res) => {
     
 }
 
+//UPDATE
+const updateUser = async (req,res) => {
+    const {_id,name,username, email} = req.body;
+    try{
+        await User.updateOne({id: _id}, {$set: {name, username, email}});
+        res.json({success: true, msg: `User updated`});
+    }catch(err){
+        res.json({success: false, msg: `ERROR: ${err}`});
+    }
+}
+
+//DELETE
 const deleteUser = async (req,res) => {
     const {_id} = req.params;
     try{
@@ -55,27 +88,17 @@ const deleteUser = async (req,res) => {
         res.json({success: true, msg: `User deleted`});
     }
     catch(err){
-        res.json({success: false, msg:err});
+        res.json({success: false, msg:`ERROR: ${err}`});
     }
 }
 
-const updateUser = () => {
-    const {name,username, password, email, administrator} = req.body;
-}
-
-const getUserInformation = () => {
-
-}
-
-const getStatistics = () => {
-
-}
 
 module.exports = {
-    getStatistics,
     getUserInformation,
+    getStatistics,
     register,
     login,
+    updateUser,
     deleteUser,
-    updateUser
+    logout
 }

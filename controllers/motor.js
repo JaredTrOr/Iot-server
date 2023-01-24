@@ -1,14 +1,15 @@
 const Gpio = require('pigpio').Gpio;
 
 //Requests
-const motorOperation = (req,res) => {
+const motorOperation = async (req,res) => {
     const {type, size} = req.body; //Get values from the Flutter app
+    //const {user} = req.body //GET THE USER
     const pin = choosePinMotor(type); 
 
     if(pin !== 0){
         const motor = new Gpio(pin, {mode: Gpio.OUTPUT}); 
         motor.servoWrite(1000); //Open gate
-        time(size); //how long it will be opened
+        await time(size); //how long it will be opened
         motor.servoWrite(0); //Close
     }
     
@@ -18,10 +19,9 @@ const motorOperation = (req,res) => {
 const choosePinMotor = (type) => {
     let motor;
     switch(type){
-        case 'peanut': motor = 7; break; 
+        case 'peanut': motor = 9; break; 
         case 'candy': motor = 10; break;
-        case 'chocolate': motor = 11; break;
-        case 'gummie': motor = 12; break;
+        case 'chocolate': motor = 20; break;
         default: motor = 0; break;
     }
     return motor;

@@ -22,9 +22,9 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     store: sessionStore,
-    cookie: {
+    /*cookie: {
         maxAge: 1000 * 60 * 60 * 24 //Equals a day
-    }
+    }*/
 }));
 app.use(cors());
 app.use('/', router);

@@ -1,1 +1,12 @@
--pigpio library
+TASKS
+
+USER MODEL
+INPUT BY USER---------------
+-Name
+-Email
+-Username
+-Password
+
+ASSIGNED BY SOFTWARE-------
+-Requests
+-Favorite candy

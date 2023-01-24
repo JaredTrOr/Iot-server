@@ -7,18 +7,20 @@ const {
     register,
     updateUser,
     deleteUser,
-    logout
+    getUserInformation
 } = require('../../controllers/user');
 
 //MiddleWares
 const isRegistered = require('../../middlewares/isRegistered');
 const isLogin = require('../../middlewares/isLogin');
 
-router.get('/statistics', getStatistics);
-router.post('/login', isLogin,login);
-router.post('/register',isRegistered, register);
-router.put('/update/:id', updateUser);
-router.delete('/delete/:id', deleteUser);
-router.delete('/logout', logout);
+router.get('/:id', getUserInformation);          //Read user
+router.get('/statistics', getStatistics);        //Read operations
+
+router.post('/register',isRegistered, register); //Create
+router.post('/login', isLogin,login);            //Validate
+router.put('/update', updateUser);           //Update
+router.delete('/delete/:id', deleteUser);        //Delete
+
 
 module.exports = router;
