@@ -29,7 +29,6 @@ const register = async (req,res) => {
         username: req.body.username,
         password: encryptedPassword,
         email: req.body.email,
-        administrator: req.body.admin
     })
 
     try{

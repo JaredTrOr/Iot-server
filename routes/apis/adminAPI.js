@@ -7,6 +7,6 @@ const {
 
 
 router.get('/getUsers', getUsers); //Read all the users
-
+router.post('/createAdmin', );
 
 module.exports = router;

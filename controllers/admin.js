@@ -1,3 +1,4 @@
+const Admin = require('../schemas/Admin');
 const User = require('../schemas/User');
 
 //READ INFORMATION

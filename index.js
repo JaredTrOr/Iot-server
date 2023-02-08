@@ -9,7 +9,6 @@ const cors = require('cors');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
-
 let sessionStore = new MongoDBStore({
     uri: process.env.MONGODB_URL,
     collection: 'sessions'
@@ -18,7 +17,7 @@ let sessionStore = new MongoDBStore({
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(session({
-    secret: process.env.MONGODB_URL,
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     store: sessionStore,

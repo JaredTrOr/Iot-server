@@ -1,11 +1,24 @@
 const Gpio = require('pigpio').Gpio;
+const Operations = require('../schemas/Operations');
 
 //Requests
 const motorOperation = async (req,res) => {
     const {type, size} = req.body; //Get values from the Flutter app
-    //const {user} = req.body //GET THE USER
-    const pin = choosePinMotor(type); 
+    const {user} = req.body //Get the user
 
+    //Make the register of the user operation
+
+    //Check if we are going to create the table or uploaded it
+    if(await Operations.findById(user.id)){
+        //Upload the table
+        
+    }
+    else {
+        //Create the table
+    }
+
+    //Motor process
+    const pin = choosePinMotor(type); 
     if(pin !== 0){
         const motor = new Gpio(pin, {mode: Gpio.OUTPUT}); 
         motor.servoWrite(1000); //Open gate
@@ -19,9 +32,9 @@ const motorOperation = async (req,res) => {
 const choosePinMotor = (type) => {
     let motor;
     switch(type){
-        case 'peanut': motor = 9; break; 
-        case 'candy': motor = 10; break;
-        case 'chocolate': motor = 20; break;
+        case 'candy1': motor = 9; break; 
+        case 'candy2': motor = 10; break;
+        case 'candy3': motor = 20; break;
         default: motor = 0; break;
     }
     return motor;

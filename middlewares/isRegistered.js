@@ -3,7 +3,7 @@ const User = require('../schemas/User');
 const isRegistered = async (req,res,next) => {
     const {name, username, password, email, administrator} = req.body;
 
-    if(name && username && password && email && administrator){
+    if(name && username && password && email){
         const userUsername = await User.findOne({username});
         if(!userUsername){
             const userEmail = await User.findOne({email});
