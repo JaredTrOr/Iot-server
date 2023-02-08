@@ -21,6 +21,16 @@ const getAdmins = async (req,res) => {
     }
 }
 
+const getAdminInformation = async (req,res) => {
+    const {id} = req.params;
+    try{
+        const admin = Admin.findById(id);
+        res.json({success: true, msg: `ERROR: ${err}`});
+    }catch(err){
+        res.json({success: false, msg: `ERROR: ${err}`});
+    }
+}
+
 //CREATE ADMIN
 const createAdmin = async (req,res) => {
     const encryptedPassword = await bcrypt.hash(req.body.password, 10);
@@ -46,7 +56,14 @@ const createAdmin = async (req,res) => {
 }
 
 //UPDATE ADMIN
-
+const updateAdmin = async (req,res) => {
+    try{
+        await Admin.findByIdAndUpdate(req.body.id, req.body);
+        res.json({success: true, msg: `Administrador actualizado`});
+    }catch(err){
+        res.json({success: false, msg: `ERROR: ${err}`});
+    }
+}
 
 //DELETE ADMIN
 const deleteAdmin = async (req,res) => {
@@ -58,9 +75,12 @@ const deleteAdmin = async (req,res) => {
         res.json({success: false, msg: `ERROR: ${err}`});
     }
 }
+
 module.exports = {
     getUsers,
     getAdmins,
+    getAdminInformation,
     createAdmin,
+    updateAdmin,
     deleteAdmin
 }

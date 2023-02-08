@@ -10,14 +10,15 @@ const {
 } = require('../../controllers/user');
 
 //MiddleWares
-const isRegistered = require('../../middlewares/isRegistered');
+const {isRegistered} = require('../../middlewares/isRegistered');
 const isLogin = require('../../middlewares/isLogin');
-const {checkUserUpdate} = require('../../middlewares/checkUpdate');
+//const {checkUserUpdate} = require('../../middlewares/checkUpdate');
 
+//Operations
 router.get('/:id', getUserInformation);             //Read user
 router.post('/register',isRegistered, register);    //Create
 router.post('/login', isLogin,login);               //Validate
-router.put('/update',checkUserUpdate, updateUser);  //Update
+router.put('/update', updateUser);  //Update
 router.delete('/delete/:id', deleteUser);           //Delete
 
 

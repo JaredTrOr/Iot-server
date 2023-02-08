@@ -6,6 +6,6 @@ const adminRouter = require('./apis/adminAPI');
 router.get('/', (req,res) => res.json({Welcome: 'Welcome to my raspcandy server'}));
 router.use('/motor', motorRouter);
 router.use('/user', userRouter);
-router.use('/admin', adminRouter)
+router.use('/admin', adminRouter);
 
 module.exports = router;

@@ -1,20 +1,17 @@
 const Gpio = require('pigpio').Gpio;
-const Operations = require('../schemas/Operations');
+const CandyOrders = require('../schemas/CandyOrders');
 
 //Requests
 const motorOperation = async (req,res) => {
     const {type, size} = req.body; //Get values from the Flutter app
     const {user} = req.body //Get the user
 
-    //Make the register of the user operation
-
     //Check if we are going to create the table or uploaded it
-    if(await Operations.findById(user.id)){
-        //Upload the table
-        
+    if(!await CandyOrders.findById(user.id)){
+        //Create the table
     }
     else {
-        //Create the table
+        //Update the table
     }
 
     //Motor process
