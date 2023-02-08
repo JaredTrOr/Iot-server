@@ -5,8 +5,7 @@ const isLogin = async (req,res,next) => {
     }   
     else{
         res.json({success: false, msg: `Empty field sent`});
-    }
-    
+    }    
 }
 
 module.exports = isLogin;

@@ -15,11 +15,6 @@ const getUserInformation = async (req,res) => {
     
 }
 
-//Get the favorite candy and the operations made
-const getStatistics = () => {
-
-}
-
 //CREATE
 const register = async (req,res) => {
     const encryptedPassword = await bcrypt.hash(req.body.password, 10);
@@ -29,14 +24,14 @@ const register = async (req,res) => {
         username: req.body.username,
         password: encryptedPassword,
         email: req.body.email,
-    })
+    });
 
     try{
         await user.save();
         //req.session.user = user;
-        res.json({success: true, msg: `User registered`, user});
+        res.json({success: true, msg: `Usuario registrado exitosamente`, user});
     }catch(err){
-        res.json({success: false, msg:err});
+        res.json({success: false, msg:`ERROR: ${err}`});
     }
 }
 
@@ -50,17 +45,17 @@ const login = async (req,res) => {
         if(user){
             try{
                 if(await bcrypt.compare(password, user.password)){
-                    res.json({success: true, msg:`User logged in`, user});
+                    res.json({success: true, msg:`Usuario ingresado exitosamente`, user});
                 }
                 else{
-                    res.json({success: false, msg: `Incorrect password`});
+                    res.json({success: false, msg: `Contraseña incorrecta`});
                 }
             }catch(err){
-                res.json({success: false, msg: err});
+                res.json({success: false, msg: `ERROR: ${err}`});
             }
         }
         else{
-            res.json({success: false, msg: `Incorrect username`});
+            res.json({success: false, msg: `Usuario incorrecto`});
         }
     }catch(err){
         res.json({success: false, msg: err});
@@ -70,10 +65,9 @@ const login = async (req,res) => {
 
 //UPDATE
 const updateUser = async (req,res) => {
-    const {_id,name,username, email} = req.body;
     try{
-        await User.updateOne({id: _id}, {$set: {name, username, email}});
-        res.json({success: true, msg: `User updated`});
+        await User.findByIdAndUpdate(req.body.id, req.body);
+        res.json({success: true, msg: `Usuario actualizado`});
     }catch(err){
         res.json({success: false, msg: `ERROR: ${err}`});
     }
@@ -84,7 +78,7 @@ const deleteUser = async (req,res) => {
     const {id} = req.params;
     try{
         await User.deleteOne({_id: id})
-        res.json({success: true, msg: `User deleted`});
+        res.json({success: true, msg: `Usuario eliminado exitosamente`});
     }
     catch(err){
         res.json({success: false, msg:`ERROR: ${err}`});
@@ -94,7 +88,6 @@ const deleteUser = async (req,res) => {
 
 module.exports = {
     getUserInformation,
-    getStatistics,
     register,
     login,
     updateUser,
