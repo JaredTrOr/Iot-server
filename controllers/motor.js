@@ -1,18 +1,10 @@
 const Gpio = require('pigpio').Gpio;
 const CandyOrders = require('../schemas/CandyOrders');
+const { insertPurchase } = require('./purchase');
 
 //Requests
 const motorOperation = async (req,res) => {
-    const {type, size} = req.body; //Get values from the Flutter app
-    const {user} = req.body //Get the user
-
-    //Check if we are going to create the table or uploaded it
-    if(!await CandyOrders.findById(user.id)){
-        //Create the table
-    }
-    else {
-        //Update the table
-    }
+    const {type, size, userId} = req.body; //Get values from the Flutter app
 
     //Motor process
     const pin = choosePinMotor(type); 

@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 
-const operationsSchema = mongoose.Schema({
-    typeOfCandy: {
+const purchaseSchema = mongoose.Schema({
+    idCandy:{
         type: String,
         required: true
     },
-    size: {
+    size:{
         type: String,
         required: true
     },
-    usernameId:{
+    userId:{
         type: String,
         required: true
     }
 });
 
-module.exports = mongoose.model('CandyOrders', operationsSchema);
+module.exports = mongoose.model('Purchase', purchaseSchema);
