@@ -1,4 +1,5 @@
 const User = require('../schemas/User');
+const Admin = require('../schemas/Admin');
 
 const isRegistered = async (req,res,next) => {
     const {name, username, password, email} = req.body;
@@ -23,7 +24,7 @@ const isRegistered = async (req,res,next) => {
     }
 }
 
-const isAdminCreated = async (req,res) => {
+const isAdminCreated = async (req,res,next) => {
     const {username, email} = req.body;
 
     const adminUsername = await Admin.findOne({username});

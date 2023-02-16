@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const purchaseSchema = mongoose.Schema({
-    idCandy:{
+    candyId:{
         type: String,
         required: true
     },
@@ -10,6 +10,10 @@ const purchaseSchema = mongoose.Schema({
         required: true
     },
     userId:{
+        type: String,
+        required: true
+    },
+    dateOfPurchase: {
         type: String,
         required: true
     }

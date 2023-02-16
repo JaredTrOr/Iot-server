@@ -1,5 +1,5 @@
 const Gpio = require('pigpio').Gpio;
-const CandyOrders = require('../schemas/CandyOrders');
+const Candy = require('../schemas/Candy');
 const { insertPurchase } = require('./purchase');
 
 //Requests

@@ -23,7 +23,7 @@ const adminSchema = mongoose.Schema({
             required: false
         },
         number:{
-            type: Number,
+            type: String,
             required: false
         },
         place: {
