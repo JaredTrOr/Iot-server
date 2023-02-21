@@ -77,6 +77,18 @@ const insertPurchase = async (req,res) => {
     }
 }
 
+const insertPurchaseWithMotor = async (candyId, size, userId) => {
+    const dateOfPurchase = dateFormat(); 
+    const purchase = new Purchase({candyId, size, userId, dateOfPurchase});
+
+    try{
+        await purchase.save();
+        res.json({success: true, msg: `Se ha hecho la compra exitosamente`});
+    }catch(err){
+        res.json({success: false, msg:`ERROR: ${err}`});
+    }
+}
+
 //Edit purchase
 const editPurchase = async (req,res) => {
     try{
@@ -110,6 +122,7 @@ const getDateTime = () => {
 
 module.exports = {
     insertPurchase,
+    insertPurchaseWithMotor,
     editPurchase,
     deletePurchase,
     getPurchases,

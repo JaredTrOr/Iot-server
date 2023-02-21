@@ -28,5 +28,4 @@ app.use(session({
 app.use(cors());
 app.use('/', router);
 
-
 app.listen(port, () => console.log(`Server on port ${port}`));

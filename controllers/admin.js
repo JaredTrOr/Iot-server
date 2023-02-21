@@ -66,6 +66,32 @@ const createAdmin = async (req,res) => {
     }
 }
 
+const loginAdmin = async (req,res) => {
+    const {username, password} = req.body;
+
+    try{
+        const admin = await Admin.findOne({username});
+        console.log(admin);
+        if(admin){
+            try{
+                if(await bcrypt.compare(password, admin.password)){
+                    res.json({success: true, msg:`Administrador ingresado exitosamente`, user});
+                }
+                else{
+                    res.json({success: false, msg: `Contraseña incorrecta`});
+                }
+            }catch(err){
+                res.json({success: false, msg: `ERROR: ${err}`});
+            }
+        }
+        else{
+            res.json({success: false, msg: `Administrador incorrecto`});
+        }
+    }catch(err){
+        res.json({success: false, msg: err});
+    }
+}
+
 //UPDATE ADMIN
 const updateAdmin = async (req,res) => {
     const encryptedPassword = await bcrypt.hash(req.body.password, 10);
@@ -104,6 +130,7 @@ module.exports = {
     getAdminInformation,
     getUserInformation,
     createAdmin,
+    loginAdmin,
     updateAdmin,
     deleteAdmin
 }

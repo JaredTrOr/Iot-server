@@ -12,7 +12,7 @@ const isRegistered = async (req,res,next) => {
                 next();
             }
             else{
-                res.json({success:false, msgs:'Email ya registrado'});
+                res.json({success:false, msg:'Email ya registrado'});
             }
         }
         else{

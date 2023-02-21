@@ -7,6 +7,7 @@ const {
     getAdminInformation,
     getUserInformation,
     createAdmin,
+    loginAdmin,
     updateAdmin,
     deleteAdmin,
 } = require('../../controllers/admin');
@@ -20,6 +21,7 @@ router.get('/getAdmins', getAdmins);
 router.get('/getUserInformation/:id', getUserInformation);
 router.get('/getAdminInformation/:id', getAdminInformation);
 router.post('/createAdmin',isAdminCreated, createAdmin);
+router.post('/loginAdmin', loginAdmin);
 router.put('/updateAdmin', updateAdmin);
 router.delete('/deleteAdmin/:id', deleteAdmin);
 

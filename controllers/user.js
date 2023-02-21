@@ -1,6 +1,5 @@
 const User = require('../schemas/User');
 const bcrypt = require('bcrypt');
-
 //READ INFORMATION
 const getUserInformation = async (req,res) => {
     const {id} = req.params;
@@ -12,7 +11,6 @@ const getUserInformation = async (req,res) => {
     catch(err){
         res.json({success: false, msg: `ERROR: ${err}`});
     }
-    
 }
 
 //CREATE

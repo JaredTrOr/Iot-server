@@ -1,12 +1,8 @@
-TASKS
+CONCERNS
 
-USER MODEL
-INPUT BY USER---------------
--Name
--Email
--Username
--Password
+-Where to deploy the API in such way that the client can make request to it
+but if there's a request to the DISPENSER pass the request to the dispenser
+and make the operation.
 
-ASSIGNED BY SOFTWARE-------
--Requests
--Favorite candy
+-Validation in the edit operation because it will let the user make the operation
+or modify the user to a one that already exists.
