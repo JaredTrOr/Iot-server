@@ -75,7 +75,7 @@ const loginAdmin = async (req,res) => {
         if(admin){
             try{
                 if(await bcrypt.compare(password, admin.password)){
-                    res.json({success: true, msg:`Administrador ingresado exitosamente`, user});
+                    res.json({success: true, msg:`Administrador ingresado exitosamente`, admin});
                 }
                 else{
                     res.json({success: false, msg: `Contraseña incorrecta`});
@@ -85,7 +85,7 @@ const loginAdmin = async (req,res) => {
             }
         }
         else{
-            res.json({success: false, msg: `Administrador incorrecto`});
+            res.json({success: false, msg: `Usuario de administrador incorrecto`});
         }
     }catch(err){
         res.json({success: false, msg: err});
