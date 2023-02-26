@@ -10,8 +10,8 @@ const {
 } = require('../../controllers/dispenser');
 
 router.get('/getDispenserCandies', getDispenserCandies);
-router.get('/getDispenserCandyByPosition', getDispenserCandyByPosition);
-router.get('/getDispenserCandyById', getDispenserCandyById);
+router.get('/getDispenserCandyByPosition/:position', getDispenserCandyByPosition);
+router.get('/getDispenserCandyById/:id', getDispenserCandyById);
 router.post('/createDispenserCandy', createDispenserCandy);
 router.put('/editDispenserCandies', editDispenserCandies);
 router.delete('/removeDispenserCandy', removeDispenserCandy);

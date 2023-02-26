@@ -65,9 +65,9 @@ const getUserCandyPurchases = async (req,res) => {
 
 //Create a purchase
 const insertPurchase = async (req,res) => {
-    const {candyId, size, userId} = req.body;
+    const {candyId, candyName, size, userId} = req.body;
     const dateOfPurchase = dateFormat(); 
-    const purchase = new Purchase({candyId, size, userId, dateOfPurchase});
+    const purchase = new Purchase({candyId, candyName , size, userId, dateOfPurchase});
 
     try{
         await purchase.save();
@@ -112,7 +112,7 @@ const deletePurchase = async (req,res) => {
 
 const dateFormat = () => {
     const date = new Date();
-    return `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()} ${getDateTime}`;
+    return `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()} ${getDateTime()}`;
 }
 
 const getDateTime = () => {

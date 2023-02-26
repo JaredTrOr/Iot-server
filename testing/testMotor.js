@@ -16,3 +16,5 @@ setInterval(() => {
         increment = 100;
     }
 },1000);
+
+//Run the command sudo node motor.js

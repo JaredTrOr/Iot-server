@@ -10,9 +10,9 @@ const motorOperation = async (req,res) => {
     const pin = choosePinMotor(candyId); 
     if(pin !== 0){
         const motor = new Gpio(pin, {mode: Gpio.OUTPUT}); 
-        motor.servoWrite(1000); //Open gate
-        await time(size); //how long it will be opened
-        motor.servoWrite(0); //Close
+        motor.pwmWrite(100); //Move the motor
+        await time(size); //how long it will be moving
+        motor.pwmWrite(0); //Stop the motor
     }
 }
 
@@ -32,17 +32,8 @@ const time = (miliseconds) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve();
-        },miliseconds);
+        },miliseconds * 1000);
     });
-}
-
-const runMotor = () => {
-    let increment = 500;
-    let pulse = 1000;
-    setTimeout(() => {
-        motor.servoWrite(pulse);
-        pulse += increment;
-    },2);
 }
 
 module.exports = {

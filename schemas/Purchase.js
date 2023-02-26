@@ -5,6 +5,10 @@ const purchaseSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    candyName: {
+        type: String,
+        required: true
+    },
     size:{
         type: String,
         required: true

@@ -10,10 +10,10 @@ const getDispenserCandies = async (req,res) => {
 }
 
 const getDispenserCandyByPosition = async (req,res) => {
-    const {position} = req.body;
+    const {position} = req.params;
 
     try{
-        const candy = Dispenser.findOne({position: position});
+        const candy = await Dispenser.findOne({position: position});
         res.json({success: true, msg: 'Operacion exitosa', candy});
     }catch(err){
         res.json({success: false, msg: `ERROR: ${err}`});
@@ -21,7 +21,7 @@ const getDispenserCandyByPosition = async (req,res) => {
 }
 
 const getDispenserCandyById = async (req,res) => {
-    const {id} = req.body;
+    const {id} = req.params;
 
     try{
         const candy = Dispenser.findById(id);
