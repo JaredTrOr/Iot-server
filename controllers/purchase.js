@@ -32,6 +32,17 @@ const getUserPurchase = async (req,res) => {
     }
 }
 
+//Get specific user amount
+const getUserAmountOfPurchases = async(req,res) => {
+    const {id} = req.params;
+    try{
+        const amountOfPurchases = await Purchase.countDocuments({userId: id});
+        res.json({success: true, amountOfPurchases})
+    }catch(err){
+        res.json({success: false, msg: `ERROR: ${err}`});
+    }
+}
+
 //Get the user amount of purchases
 const getUserCandyPurchases = async (req,res) => {
     const arrayOfAmountsOfCandy = [];
@@ -45,9 +56,9 @@ const getUserCandyPurchases = async (req,res) => {
         const candies = await Candy.find(); 
         for(const candy of candies){
             const candyId = candy._id.toString();
-            const smallSize = await Purchase.countDocuments({userId: id, candyId, size: 'small'});
-            const mediumSize = await Purchase.countDocuments({userId: id, candyId, size: 'medium'});
-            const bigSize = await Purchase.countDocuments({userId: id, candyId, size: 'big'});
+            const smallSize = await Purchase.countDocuments({$and: [{userId: id}, {candyId: candyId}, {size: 'Chico'}]});
+            const mediumSize = await Purchase.countDocuments({$and: [{userId: id}, {candyId: candyId}, {size: 'Mediano'}]});
+            const bigSize = await Purchase.countDocuments({$and: [{userId: id}, {candyId: candyId}, {size: 'Grande'}]});
             arrayOfAmountsOfCandy.push(
                 {
                     typeOfCandy: candy.name,
@@ -128,5 +139,6 @@ module.exports = {
     getPurchases,
     getUserPurchase,
     getTotalAmountOfPurchases,
-    getUserCandyPurchases
+    getUserCandyPurchases,
+    getUserAmountOfPurchases
 }
