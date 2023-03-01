@@ -43,7 +43,7 @@ const getUserAmountOfPurchases = async(req,res) => {
     }
 }
 
-//Get the user amount of purchases
+//Get the user amount of purchases per candy
 const getUserCandyPurchases = async (req,res) => {
     const arrayOfAmountsOfCandy = [];
     const {id} = req.params;

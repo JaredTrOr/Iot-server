@@ -63,8 +63,18 @@ const login = async (req,res) => {
 
 //UPDATE
 const updateUser = async (req,res) => {
+
+    const encryptedPassword = await bcrypt.hash(req.body.password, 10);
+    
+    const updatedUser = {
+        name: req.body.name,
+        username: req.body.username,
+        password: encryptedPassword,
+        email: req.body.email,
+    };
+
     try{
-        await User.findByIdAndUpdate(req.body.id, req.body);
+        await User.findByIdAndUpdate(req.body.id, updatedUser);
         res.json({success: true, msg: `Usuario actualizado`});
     }catch(err){
         res.json({success: false, msg: `ERROR: ${err}`});
