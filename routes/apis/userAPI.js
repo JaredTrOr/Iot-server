@@ -6,7 +6,9 @@ const {
     register,
     updateUser,
     deleteUser,
-    getUserInformation
+    getUserInformation,
+    getUserFavoriteCandy,
+    setFavoriteCandy
 } = require('../../controllers/user');
 
 //MiddleWares
@@ -16,6 +18,8 @@ const isLogin = require('../../middlewares/isLogin');
 
 //Operations
 router.get('/:id', getUserInformation);             //Read user
+router.get('/favoriteCandy/:id', getUserFavoriteCandy);
+router.get('/setFavoriteCandy/:id', setFavoriteCandy); //THIS WILL CHANGE TO THE PUT METHOD
 router.post('/register',isRegistered, register);    //Create
 router.post('/login', isLogin,login);               //Validate
 router.put('/update', updateUser);  //Update

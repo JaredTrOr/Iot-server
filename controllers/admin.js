@@ -71,7 +71,6 @@ const loginAdmin = async (req,res) => {
 
     try{
         const admin = await Admin.findOne({username});
-        console.log(admin);
         if(admin){
             try{
                 if(await bcrypt.compare(password, admin.password)){

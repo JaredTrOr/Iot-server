@@ -1,5 +1,6 @@
 const Purchase = require('../schemas/Purchase');
 const Candy = require('../schemas/Candy');
+const Dispenser = require('../schemas/Dispenser');
 
 //Get all the purhcases
 const getPurchases = async (req,res) => {
@@ -53,12 +54,12 @@ const getUserCandyPurchases = async (req,res) => {
         const total = await Purchase.countDocuments({userId: id});
 
         //Get the amount per candy
-        const candies = await Candy.find(); 
+        const candies =  await Candy.find(); 
         for(const candy of candies){
             const candyId = candy._id.toString();
-            const smallSize = await Purchase.countDocuments({$and: [{userId: id}, {candyId: candyId}, {size: 'Chico'}]});
-            const mediumSize = await Purchase.countDocuments({$and: [{userId: id}, {candyId: candyId}, {size: 'Mediano'}]});
-            const bigSize = await Purchase.countDocuments({$and: [{userId: id}, {candyId: candyId}, {size: 'Grande'}]});
+            const smallSize = await Purchase.countDocuments({$and: [{userId: id}, {candyName: candy.name}, {size: 'Chico'}]});
+            const mediumSize = await Purchase.countDocuments({$and: [{userId: id}, {candyName: candy.name}, {size: 'Mediano'}]});
+            const bigSize = await Purchase.countDocuments({$and: [{userId: id}, {candyName: candy.name}, {size: 'Grande'}]});
             arrayOfAmountsOfCandy.push(
                 {
                     typeOfCandy: candy.name,
@@ -142,3 +143,9 @@ module.exports = {
     getUserCandyPurchases,
     getUserAmountOfPurchases
 }
+
+/*
+    The purchase is made witht the dispenser,
+    and the retreiving of the information
+    has to be from the candies
+*/

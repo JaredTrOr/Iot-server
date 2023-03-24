@@ -1,5 +1,8 @@
 const User = require('../schemas/User');
+const Candy = require('../schemas/Candy');
+const Purchase = require('../schemas/Purchase');
 const bcrypt = require('bcrypt');
+
 //READ INFORMATION
 const getUserInformation = async (req,res) => {
     const {id} = req.params;
@@ -11,6 +14,43 @@ const getUserInformation = async (req,res) => {
     catch(err){
         res.json({success: false, msg: `ERROR: ${err}`});
     }
+}
+
+const getUserFavoriteCandy = async (req,res) => {
+    const {id} = req.params;
+
+    try{
+        const user = await User.findById(id);
+        res.json({success: true, 'favorite_candy': user.favorite_candy});
+    }
+    catch(err){
+        res.json({success: false, msg: `ERROR: ${err}`});
+    }
+}
+
+const setFavoriteCandy = async (req,res) => {
+    const arrayOfAmountsOfCandy = [];
+    const {id} = req.params;
+
+    let favoriteCandy;
+
+    try{
+        //Get the amount per candy
+        const candies =  await Candy.find(); 
+        for(const candy of candies){
+            const amountOfCandy = await Purchase.countDocuments({$and: [{userId: id}, {candyName: candy.name}]});
+            arrayOfAmountsOfCandy.push({
+                nameOfCandy: candy.name,
+                amount: amountOfCandy
+            });
+        }
+
+        res.json({success: true, arrayOfAmountsOfCandy});
+
+    }catch(err){
+        res.json({success: false, msg: `ERROR: ${err}`});
+    }
+
 }
 
 //CREATE
@@ -96,6 +136,8 @@ const deleteUser = async (req,res) => {
 
 module.exports = {
     getUserInformation,
+    getUserFavoriteCandy,
+    setFavoriteCandy,
     register,
     login,
     updateUser,
