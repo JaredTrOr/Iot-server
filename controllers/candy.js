@@ -19,8 +19,8 @@ const getAmountOfCandies = async (req,res) => {
 }
 
 const createCandy = async (req,res) => {
-    const {name} = req.body;
-    const candy = new Candy({name});
+    const {name, description} = req.body;
+    const candy = new Candy({name,description});
 
     try{
         await candy.save();
