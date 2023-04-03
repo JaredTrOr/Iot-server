@@ -8,6 +8,7 @@ const {
     deleteUser,
     getUserInformation,
     getUserFavoriteCandy,
+    changePassword,
     setFavoriteCandy
 } = require('../../controllers/user');
 
@@ -22,6 +23,7 @@ router.get('/favoriteCandy/:id', getUserFavoriteCandy);
 router.get('/setFavoriteCandy/:id', setFavoriteCandy); //THIS WILL CHANGE TO THE PUT METHOD
 router.post('/register',isRegistered, register);    //Create
 router.post('/login', isLogin,login);               //Validate
+router.put('/changePassword', changePassword);
 router.put('/update', updateUser);  //Update
 router.delete('/delete/:id', deleteUser);           //Delete
 

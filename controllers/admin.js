@@ -15,7 +15,7 @@ const getUsers = async (req,res) => {
 //READ ADMINS
 const getAdmins = async (req,res) => {
     try{
-        const admins = await Admin.find();
+        const admins = await Admin.find({_id: {$ne: req.params.id}});
         res.json({success: true, admins});
     }catch(err){
         res.json({success: false, msg: `ERROR: ${err}`});

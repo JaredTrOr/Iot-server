@@ -17,7 +17,7 @@ const {isAdminCreated} = require('../../middlewares/isRegistered');
 
 //Operations
 router.get('/getUsers', getUsers); 
-router.get('/getAdmins', getAdmins);
+router.get('/getAdmins/:id', getAdmins);
 router.get('/getUserInformation/:id', getUserInformation);
 router.get('/getAdminInformation/:id', getAdminInformation);
 router.post('/createAdmin',isAdminCreated, createAdmin);

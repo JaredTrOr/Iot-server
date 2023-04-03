@@ -103,13 +103,10 @@ const login = async (req,res) => {
 
 //UPDATE
 const updateUser = async (req,res) => {
-
-    const encryptedPassword = await bcrypt.hash(req.body.password, 10);
     
     const updatedUser = {
         name: req.body.name,
         username: req.body.username,
-        password: encryptedPassword,
         email: req.body.email,
     };
 
@@ -133,6 +130,18 @@ const deleteUser = async (req,res) => {
     }
 }
 
+const changePassword = async (req,res) => {
+    const encryptedPassword = await bcrypt.hash(req.body.password, 10);
+
+    try{
+        await User.findByIdAndUpdate(req.body.id, {
+            password: encryptedPassword
+        });
+        res.json({success: true, msg: `Se cambio la contraseña exitosamente`});
+    }catch(err){
+        res.json({success: false, msg: `ERROR: ${err}`});
+    }
+}
 
 module.exports = {
     getUserInformation,
@@ -141,5 +150,6 @@ module.exports = {
     register,
     login,
     updateUser,
+    changePassword,
     deleteUser,
 }
