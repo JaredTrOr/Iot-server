@@ -93,12 +93,10 @@ const loginAdmin = async (req,res) => {
 
 //UPDATE ADMIN
 const updateAdmin = async (req,res) => {
-    const encryptedPassword = await bcrypt.hash(req.body.password, 10);
     try{
         await Admin.findByIdAndUpdate(req.body.id, {
             name: req.body.name,
             username: req.body.username,
-            password: encryptedPassword,
             email: req.body.email,
             address: {
                 street: req.body.street,
@@ -107,6 +105,17 @@ const updateAdmin = async (req,res) => {
             }
         });
         res.json({success: true, msg: `Administrador actualizado`});
+    }catch(err){
+        res.json({success: false, msg: `ERROR: ${err}`});
+    }
+}
+
+const changePassword = async (req,res) => {
+    const encryptedPassword = await bcrypt.hash(req.body.password, 10);
+    try{
+        await Admin.findByIdAndUpdate(req.body.id, {
+            password: encryptedPassword
+        });
     }catch(err){
         res.json({success: false, msg: `ERROR: ${err}`});
     }
@@ -131,5 +140,6 @@ module.exports = {
     createAdmin,
     loginAdmin,
     updateAdmin,
-    deleteAdmin
+    deleteAdmin,
+    changePassword
 }
